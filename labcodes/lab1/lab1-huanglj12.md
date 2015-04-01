@@ -278,7 +278,6 @@ si
 	----------------
 	IN: 
 	0x00007d0d:  push   %ebp
-```
 
 其与bootasm.S和bootblock.asm中的代码相同。
 
