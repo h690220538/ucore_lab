@@ -297,7 +297,6 @@ si
 ```
 
 > 开启A20：通过将键盘控制器上的A20线置于高电位，全部32条地址线可用，可以访问4G的内存空间。
-```
 	seta20.1:               # 等待8042键盘控制器不忙
 	    inb $0x64, %al      # 
 	    testb $0x2, %al     #
@@ -313,7 +312,6 @@ si
 	
 	    movb $0xdf, %al     # 打开A20
 	    outb %al, $0x60     # 
-```
 
 > 初始化GDT表：一个简单的GDT表和其描述符已经静态储存在引导区中，载入即可
 ```
@@ -354,7 +352,6 @@ si
 ##[练习4]分析bootloader加载ELF格式的OS的过程。
 
 > 首先看readsect函数，`readsect`从设备的第secno扇区读取数据到dst位置
-```
 	static void
 	readsect(void *dst, uint32_t secno) {
 	    waitdisk();
@@ -376,10 +373,8 @@ si
 	    insl(0x1F0, dst, SECTSIZE / 4);         // 读取到dst位置，
 	                                            // 幻数4因为这里以DW为单位
 	}
-```
 
 > readseg简单包装了readsect，可以从设备读取任意长度的内容。
-```
 	static void
 	readseg(uintptr_t va, uint32_t count, uint32_t offset) {
 	    uintptr_t end_va = va + count;
@@ -394,10 +389,8 @@ si
 	        readsect((void *)va, secno);
 	    }
 	}
-```
 
 > 在bootmain函数中，
-```
 	void
 	bootmain(void) {
 	    // 首先读取ELF的头部
@@ -430,7 +423,6 @@ si
 	    outw(0x8A00, 0x8E00);
 	    while (1);
 	}
-```
 
 ##[练习5]实现函数调用堆栈跟踪函数
 
